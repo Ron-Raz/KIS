@@ -1,4 +1,4 @@
-const VER = '20190104-1716';
+const VER = '20190104-1719';
 
 const myDebug = true;
 
@@ -19,13 +19,13 @@ function addCSSRule(sheet, selectorsArray, rules, index) {
 	// selectorsArray is an array from selectors
 	var combinedSelectors = '';
 	for (i in selectorsArray) combinedSelectors += selectors[selectorsArray[i]];
-	// remove trailing suffix comma if necessary
-	var mySelector = combinedSelectors.replace(/([\S\s]*)(,\s$)/, "$1");
+	// remove last comma
+	combinedSelectors= combinedSelectors.slice(0, -1);
 	if ("insertRule" in sheet) {
-		sheet.insertRule(mySelector + "{" + rules + "}", index);
+		sheet.insertRule(combinedSelectors + "{" + rules + "}", index);
 	}
 	else if ("addRule" in sheet) {
-		sheet.addRule(mySelector, rules, index);
+		sheet.addRule(combinedSelectors, rules, index);
 	}
 }
 
