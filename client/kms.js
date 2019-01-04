@@ -1,4 +1,4 @@
-const VER = '20190104-1722';
+const VER = '20190104-1730';
 
 const myDebug = true;
 
@@ -42,7 +42,8 @@ $(function () {
 	// show SIP fields ony when creating or editing a live entry
 	var res = wlp.split('/');
 	if (wlp === '/kwebcast/entry/add' || ($("#KwebcastAdvancedOptions-tab").length > 0)) {
-		console.log("don't hide sip field");
+		addCSSRule(document.styleSheets[0], ['sipAction', 'sipStats'], "display: none !important");
+		console.log("only hide sipAction and SipStats");
 	} else {
 		addCSSRule(document.styleSheets[0], ['sipAction', 'sipStats', 'sipEndpoint'], "display: none !important");
 		console.log("rule added to hide sip field");
