@@ -1,4 +1,4 @@
-const VER = '20190104-1517';
+const VER = 'hello';
 
 const myDebug = true;
 
