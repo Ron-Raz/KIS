@@ -1,3 +1,9 @@
+const myDebug = true;
+
+if (myDebug === false ) {
+	console.log= function(){};
+}
+
 function addCSSRule(sheet, selector, rules, index) {
 	// addCSSRule(document.styleSheets[0], "header", "float: left");
 	if("insertRule" in sheet) {
@@ -11,7 +17,7 @@ function addCSSRule(sheet, selector, rules, index) {
 
 $(function() {
 	var wlp= window.location.pathname;
-	console.log("ver24", wlp);
+	console.log("ver25", wlp);
 	/*
 	pathname		action
 	========		======
