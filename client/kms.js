@@ -1,4 +1,4 @@
-const VER = '20190104-1620';
+const VER = '20190104-1630';
 
 const myDebug = true;
 
@@ -37,7 +37,7 @@ $(function() {
 		console.log("don't hide sip field");
 	} else {
 		addCSSRule(document.styleSheets[0], "#customdata-SIP, #customdata-SIP+P, #customdata-SIP-label, #entry-metadata,"+
-		"#customdata-ServerAction-label, #customdata-ServerAction-label + div, #customdata-Stats-label, div + div + #customdata-Stats", "display: none !important");
+		"#customdata-ServerAction-label, #edit_entry > div:nth-child(14), #customdata-Stats-label, #edit_entry > div:nth-child(16)", "display: none !important");
 		console.log("rule added to hide sip field");
 		if( wlp === '/media/SIP/1_7y4l9qys' ) {
 			addCSSRule(document.styleSheets[0], "#entryDataBlock", "width: 100% !important");
