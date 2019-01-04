@@ -1,12 +1,10 @@
-const VER = '20190104-1752';
+const VER = '20190104-1755';
 
 const myDebug = true;
 
 if (myDebug === false) {
 	console.log = function () { };
 }
-
-console.log("client/kms.js version=", VER);
 
 var selectors = {
 	'sipAction': "#customdata-ServerAction-label, #edit_entry > div:nth-child(14),",
@@ -32,6 +30,7 @@ function addCSSRule(sheet, selectorsArray, rules, index) {
 
 $(function () {
 	var wlp = window.location.pathname;
+	console.log("client/kms.js version=", VER, "wlp=",wlp);
 	/*
 	pathname		action
 	========		======
