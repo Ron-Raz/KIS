@@ -1,4 +1,4 @@
-const VER = '20190104-1730';
+const VER = '20190104-1745';
 
 const myDebug = true;
 
@@ -12,7 +12,8 @@ var selectors = {
 	'sipAction': "#customdata-ServerAction-label, #edit_entry > div:nth-child(14),",
 	'sipEndpoint': "#customdata-SIP, #customdata-SIP+P, #customdata-SIP-label, #entry-metadata,",
 	'sipStats': "#customdata-Stats-label, #edit_entry > div:nth-child(16),",
-	'entryBlock': "#entryDataBlock,"
+	'entryBlock': "#entryDataBlock,",
+	'mediaPanel':"#wrapper,"
 };
 function addCSSRule(sheet, selectorsArray, rules, index) {
 	// addCSSRule(document.styleSheets[0], "header", "float: left");
@@ -47,9 +48,10 @@ $(function () {
 	} else {
 		addCSSRule(document.styleSheets[0], ['sipAction', 'sipStats', 'sipEndpoint'], "display: none !important");
 		console.log("rule added to hide sip field");
-		if (wlp === '/media/SIP/1_7y4l9qys') {
-			addCSSRule(document.styleSheets[0], ['entryBlock'], "width: 100% !important");
-			$("#wrapper, #mySidebar, #stats_wrap, #entryActions, #entry-nav").detach();
+		if (wlp.startsWith('/media/SIP/')) {
+			console.log('sip admin page')
+			//addCSSRule(document.styleSheets[0], ['entryBlock'], "width: 100% !important");
+			//$("#wrapper, #mySidebar, #stats_wrap, #entryActions, #entry-nav").detach();
 		}
 	}
 	/*
