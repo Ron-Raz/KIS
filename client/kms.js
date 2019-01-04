@@ -1,10 +1,12 @@
-const VER = '20190104-1517';
+const VER = '20190104-1522';
 
 const myDebug = true;
 
 if (myDebug === false ) {
 	console.log= function(){};
 }
+
+console.log("client/kms.js version=",VER);
 
 function addCSSRule(sheet, selector, rules, index) {
 	// addCSSRule(document.styleSheets[0], "header", "float: left");
