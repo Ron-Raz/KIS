@@ -1,4 +1,4 @@
-const VER = '20190104-1755';
+const VER = '20190104-1806';
 
 const myDebug = true;
 
@@ -45,7 +45,7 @@ $(function () {
 		addCSSRule(document.styleSheets[0], ['sipAction', 'sipStats'], "display: none !important");
 		console.log("only hide sipAction and SipStats");
 	} else {
-		if (wlp.startsWith('/media/SIP/')) {
+		if (wlp.startsWith('/media/')) {
 			console.log('sip admin page')
 			//addCSSRule(document.styleSheets[0], ['entryBlock'], "width: 100% !important");
 			//$("#wrapper, #mySidebar, #stats_wrap, #entryActions, #entry-nav").detach();
