@@ -1,4 +1,4 @@
-const VER = '20190104-1522';
+const VER = '20190104-1551';
 
 const myDebug = true;
 
@@ -37,7 +37,8 @@ $(function() {
 	if( wlp === '/kwebcast/entry/add' || ($("#KwebcastAdvancedOptions-tab").length > 0) ) {
 		console.log("don't hide sip field");
 	} else {
-		addCSSRule(document.styleSheets[0], "#customdata-SIP, #customdata-SIP+P, #customdata-SIP-label, #entry-metadata", "display: none !important");
+		addCSSRule(document.styleSheets[0], "#customdata-SIP, #customdata-SIP+P, #customdata-SIP-label, #entry-metadata,"+
+		"#customdata-ServerAction-label, #customdata-StartTime-label", "display: none !important");
 		console.log("rule added to hide sip field");
 		if( wlp === '/media/SIP/1_7y4l9qys' ) {
 			addCSSRule(document.styleSheets[0], "#entryDataBlock", "width: 100% !important");
