@@ -1,26 +1,36 @@
-const VER = '20190104-1630';
+const VER = '20190104-1716';
 
 const myDebug = true;
 
-if (myDebug === false ) {
-	console.log= function(){};
+if (myDebug === false) {
+	console.log = function () { };
 }
 
-console.log("client/kms.js version=",VER);
+console.log("client/kms.js version=", VER);
 
-function addCSSRule(sheet, selector, rules, index) {
+var selectors = {
+	'sipAction': "#customdata-ServerAction-label, #edit_entry > div:nth-child(14),",
+	'sipEndpoint': "#customdata-SIP, #customdata-SIP+P, #customdata-SIP-label, #entry-metadata,",
+	'sipStats': "#customdata-Stats-label, #edit_entry > div:nth-child(16),",
+	'entryBlock': "#entryDataBlock,"
+};
+function addCSSRule(sheet, selectorsArray, rules, index) {
 	// addCSSRule(document.styleSheets[0], "header", "float: left");
-	if("insertRule" in sheet) {
-		sheet.insertRule(selector + "{" + rules + "}", index);
+	// selectorsArray is an array from selectors
+	var combinedSelectors = '';
+	for (i in selectorsArray) combinedSelectors += selectors[selectorsArray[i]];
+	// remove trailing suffix comma if necessary
+	var mySelector = combinedSelectors.replace(/([\S\s]*)(,\s$)/, "$1");
+	if ("insertRule" in sheet) {
+		sheet.insertRule(mySelector + "{" + rules + "}", index);
 	}
-	else if("addRule" in sheet) {
-		sheet.addRule(selector, rules, index);
+	else if ("addRule" in sheet) {
+		sheet.addRule(mySelector, rules, index);
 	}
 }
 
-
-$(function() {
-	var wlp= window.location.pathname;
+$(function () {
+	var wlp = window.location.pathname;
 	/*
 	pathname		action
 	========		======
@@ -28,19 +38,16 @@ $(function() {
 	/kwebcast/entry/add	show sip field
 	/media/SIP/1_7y4l9qys	show sip server status
 	*/
-	// update favicon
-	$('link[rel="icon"]').attr('href', 'https://i.ibb.co/5GgsZPF/favicon-bnsf.png'); 
-	
+
 	// show SIP fields ony when creating or editing a live entry
-	var res= wlp.split('/');
-	if( wlp === '/kwebcast/entry/add' || ($("#KwebcastAdvancedOptions-tab").length > 0) ) {
+	var res = wlp.split('/');
+	if (wlp === '/kwebcast/entry/add' || ($("#KwebcastAdvancedOptions-tab").length > 0)) {
 		console.log("don't hide sip field");
 	} else {
-		addCSSRule(document.styleSheets[0], "#customdata-SIP, #customdata-SIP+P, #customdata-SIP-label, #entry-metadata,"+
-		"#customdata-ServerAction-label, #edit_entry > div:nth-child(14), #customdata-Stats-label, #edit_entry > div:nth-child(16)", "display: none !important");
+		addCSSRule(document.styleSheets[0], ['sipAction', 'sipStats', 'sipAction'], "display: none !important");
 		console.log("rule added to hide sip field");
-		if( wlp === '/media/SIP/1_7y4l9qys' ) {
-			addCSSRule(document.styleSheets[0], "#entryDataBlock", "width: 100% !important");
+		if (wlp === '/media/SIP/1_7y4l9qys') {
+			addCSSRule(document.styleSheets[0], ['entryBlock'], "width: 100% !important");
 			$("#wrapper, #mySidebar, #stats_wrap, #entryActions, #entry-nav").detach();
 		}
 	}
