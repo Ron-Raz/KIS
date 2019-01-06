@@ -1,4 +1,4 @@
-const VER = '20190106-0045';
+const VER = '20190106-0049';
 
 const myDebug = true;
 
@@ -59,7 +59,7 @@ $(function () {
 		if (wlp.startsWith('/media/SIP/')) {
 			console.log('sip admin page')
 			addCSSRule(document.styleSheets[0], ['entryBlock'], "width: 100% !important");
-			$(getSelectors(['toBeAttached', 'endPoint'])).detach();
+			$(getSelectors(['toBeDetached', 'endPoint'])).detach();
 		} else {
 			console.log("rule added to hide sip field");
 			addCSSRule(document.styleSheets[0], ['sipAction', 'sipStats', 'sipEndpoint'], "display: none !important");
