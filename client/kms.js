@@ -1,4 +1,4 @@
-const VER = '20190106-0039';
+const VER = '20190106-0041';
 
 const myDebug = true;
 
@@ -14,12 +14,10 @@ var selectors = {
 	'mediaPanel': "#wrapper,",
 	// SIP admin page, view mode
 	'entryBlock': "#entryDataBlock,",
-	'panels': "#entry-metadata > dt:nth-child(1), #mySidebar, #eCaptions, #stats_wrap",
-	'endpoint': "#entry-metadata > dt:nth-child(1), #entry-metadata > dd:nth-child(2), ",
-	'actions': "#entryActionsMenu > li:nth-child(2), #entryActionsMenu > li:nth-child(3), #entryActionsMenu > li.divider, #entryActionsMenu > li:nth-child(5)",
-	'toBeDetached': "#wrapper, #mySidebar, #stats_wrap, #entryActions, #entry-nav"
-
-
+	'panels': "#entry-metadata > dt:nth-child(1), #mySidebar, #eCaptions, #stats_wrap,",
+	'endpoint': "#entry-metadata > dt:nth-child(1), #entry-metadata > dd:nth-child(2),",
+	'actions': "#entryActionsMenu > li:nth-child(2), #entryActionsMenu > li:nth-child(3), #entryActionsMenu > li.divider, #entryActionsMenu > li:nth-child(5),",
+	'toBeDetached': "#wrapper, #mySidebar, #stats_wrap, #entryActions, #entry-nav,"
 };
 
 function getSelectors(selarray) {
