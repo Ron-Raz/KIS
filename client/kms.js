@@ -1,4 +1,4 @@
-const VER = '20190106-1731';
+const VER = '20190106-1733';
 
 const myDebug = true;
 
@@ -35,7 +35,7 @@ var pageMap = {
 	'nonWebCastEdit': () => {
 		console.log('non-webcast edit');
 		addCSSRule(document.styleSheets[0], ['sipEndpoint', 'sipAction'], "display: none !important");
-	}
+	},
 	'catchAll': () => {
 		console.log('catchall');
 		if ($('#KwebcastAdvancedOptions-tab').length > 0) {
