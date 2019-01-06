@@ -1,6 +1,7 @@
-const VER = '20190106-1733';
+const VER = '20190106-1742';
 
 const myDebug = true;
+var wlp = window.location.pathname;
 
 if (myDebug === false) {
 	console.log = function () {};
@@ -17,7 +18,6 @@ var pageMap = {
 		console.log('sip admin page - view')
 		addCSSRule(document.styleSheets[0], ['entryBlock'], "width: 100% !important");
 		$(getSelectors(['toBeDetached', 'endpoint', 'menuItems'])).detach();
-
 	},
 	'/edit/1_7y4l9qys': () => {
 		console.log("sip admin page - edit");
@@ -40,12 +40,14 @@ var pageMap = {
 		console.log('catchall');
 		if ($('#KwebcastAdvancedOptions-tab').length > 0) {
 			pageMap['editWebcast']();
-		}
-		elseif(wlp.startsWith('/edit/')) {
-			pageMap['nonWebCastEdit']();
+		} else {
+			if (wlp.startsWith('/edit/')) {
+				pageMap['nonWebCastEdit']();
+			}
 		}
 	}
-}
+};
+
 var selectors = {
 	// upload media
 	'sipAction': "#customdata-ServerAction-label, #edit_entry > div:nth-child(14),",
@@ -82,7 +84,6 @@ function addCSSRule(sheet, selectorsArray, rules, index) {
 }
 
 $(function () {
-	var wlp = window.location.pathname;
 	console.log("client/kms.js version=", VER, "wlp=", wlp);
 	/*
 	pathname		action
