@@ -1,11 +1,33 @@
-const VER = '20190106-1441';
+const VER = '20190106-1649';
 
 const myDebug = true;
 
 if (myDebug === false) {
 	console.log = function () {};
 }
+var pageAddWebcast = () => {
 
+}
+var pageMap = {
+	'/kwebcast/entry/add': () => {
+		console.log('add Webcast');
+		addCSSRule(document.styleSheets[0], ['sipAction', 'sipStats'], "display: none !important");
+	},
+	'/media/SIP/1_7y4l9qys': () => {
+		console.log('sip admin page - view')
+		addCSSRule(document.styleSheets[0], ['entryBlock'], "width: 100% !important");
+		$(getSelectors(['toBeDetached', 'endpoint', 'menuItems'])).detach();
+
+	},
+	'/edit/1_7y4l9qys': () => {
+		console.log("sip admin page - edit");
+		addCSSRule(document.styleSheets[0], ['sipAction', 'sipStats', 'sipEndpoint'], "display: none !important");
+	},
+	'catchAll': () => {
+		console.log('catchall');
+
+	}
+}
 var selectors = {
 	// upload media
 	'sipAction': "#customdata-ServerAction-label, #edit_entry > div:nth-child(14),",
@@ -50,31 +72,13 @@ $(function () {
 	/kwebcast/entry/add	show sip field
 	/media/SIP/1_7y4l9qys	show sip server status
 	*/
-
-	// show SIP fields ony when creating or editing a live entry
-	var res = wlp.split('/');
-	if (wlp === '/kwebcast/entry/add' || ($("#KwebcastAdvancedOptions-tab").length > 0)) {
-		addCSSRule(document.styleSheets[0], ['sipAction', 'sipStats'], "display: none !important");
-		console.log("only hide sipAction and SipStats");
-	} else {
-		if (wlp.startsWith('/media/SIP/')) {
-			console.log('sip admin page')
-			addCSSRule(document.styleSheets[0], ['entryBlock'], "width: 100% !important");
-			$(getSelectors(['toBeDetached', 'endpoint','menuItems'])).detach();
-		} else {
-			console.log("rule added to hide sip field");
-			addCSSRule(document.styleSheets[0], ['sipAction', 'sipStats', 'sipEndpoint'], "display: none !important");
-		}
+	var f = null;
+	for (var i in pageMap) {
+		if (wlp.startsWith(i)) f = pageMap[i];
 	}
-	/*
-	$( "#Entry-name" ).on( "focus", function() {
-		console.log( "entry name focus. Entry-submit=",$("#Entry-submit").length );
-		if( $("#Entry-submit") > 0 ) {
-			$("#customdata-SIP, #customdata-SIP+P, #customdata-SIP-label").show();
-			console.log("showing fields");
-		} else {
-			console.log("keeping fields hidden");
-		}
-	});
-	*/
+	if (f) {
+		f();
+	} else {
+		pageMap['catchAll']();
+	}
 });
