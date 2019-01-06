@@ -1,4 +1,4 @@
-const VER = '20190106-0132';
+const VER = '20190106-0152';
 
 const myDebug = true;
 
@@ -17,7 +17,7 @@ var selectors = {
 	'panels': "#entry-metadata > dt:nth-child(1), #mySidebar, #eCaptions, #stats_wrap,",
 	'endpoint': "#entry-metadata > dt:nth-child(1), #entry-metadata > dd:nth-child(2),",
 	'actions': "#entryActionsMenu > li:nth-child(2), #entryActionsMenu > li:nth-child(3), #entryActionsMenu > li.divider, #entryActionsMenu > li:nth-child(5),",
-	'toBeDetached': "#wrapper, #mySidebar, #stats_wrap, #entryActions, #entry-nav, #entry-metadata > dt:nth-child(3),#entry-metadata > dd:nth-child(4),"
+	'toBeDetached': "#wrapper, #mySidebar, #stats_wrap, #entryActions, #entry-nav,"
 };
 
 function getSelectors(selarray) {
