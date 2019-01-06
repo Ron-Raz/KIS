@@ -1,4 +1,4 @@
-const VER = '20190106-1705';
+const VER = '20190106-1706';
 
 const myDebug = true;
 
@@ -32,7 +32,7 @@ var pageMap = {
 	'catchAll': () => {
 		console.log('catchall');
 		if ($('#KwebcastAdvancedOptions-tab').length > 0) {
-			pageMap['editWebast']();
+			pageMap['editWebcast']();
 		}
 	}
 }
