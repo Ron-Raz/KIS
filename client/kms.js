@@ -1,4 +1,4 @@
-const VER = '20190106-0041';
+const VER = '20190106-0045';
 
 const myDebug = true;
 
@@ -25,6 +25,7 @@ function getSelectors(selarray) {
 	for (i in selarray) combinedSelectors += selectors[selarray[i]];
 	// remove last comma
 	combinedSelectors = combinedSelectors.slice(0, -1);
+	console.log('combinedSelectors=', combinedSelectors);
 	return combinedSelectors;
 }
 
