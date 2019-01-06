@@ -1,4 +1,4 @@
-const VER = '20190106-1716';
+const VER = '20190106-1731';
 
 const myDebug = true;
 
@@ -11,7 +11,7 @@ var pageAddWebcast = () => {
 var pageMap = {
 	'/kwebcast/entry/add': () => {
 		console.log('add Webcast');
-		addCSSRule(document.styleSheets[0], ['sipAction', 'sipStats'], "display: none !important");
+		addCSSRule(document.styleSheets[0], ['sipAction'], "display: none !important");
 	},
 	'/media/SIP/1_7y4l9qys': () => {
 		console.log('sip admin page - view')
@@ -21,7 +21,7 @@ var pageMap = {
 	},
 	'/edit/1_7y4l9qys': () => {
 		console.log("sip admin page - edit");
-		addCSSRule(document.styleSheets[0], ['sipAction', 'sipStats', 'sipEndpoint'], "display: none !important");
+		addCSSRule(document.styleSheets[0], ['sipAction', 'sipEndpoint'], "display: none !important");
 	},
 	'/upload/media': () => {
 		console.log('upload media');
@@ -32,10 +32,17 @@ var pageMap = {
 		console.log('edit webcast');
 		addCSSRule(document.styleSheets[0], ['editWebcast'], "display: none !important");
 	},
+	'nonWebCastEdit': () => {
+		console.log('non-webcast edit');
+		addCSSRule(document.styleSheets[0], ['sipEndpoint', 'sipAction'], "display: none !important");
+	}
 	'catchAll': () => {
 		console.log('catchall');
 		if ($('#KwebcastAdvancedOptions-tab').length > 0) {
 			pageMap['editWebcast']();
+		}
+		elseif(wlp.startsWith('/edit/')) {
+			pageMap['nonWebCastEdit']();
 		}
 	}
 }
