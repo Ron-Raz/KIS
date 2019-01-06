@@ -1,4 +1,4 @@
-const VER = '20190106-1649';
+const VER = '20190106-1705';
 
 const myDebug = true;
 
@@ -23,9 +23,17 @@ var pageMap = {
 		console.log("sip admin page - edit");
 		addCSSRule(document.styleSheets[0], ['sipAction', 'sipStats', 'sipEndpoint'], "display: none !important");
 	},
+	// following can't be identified solely by url path
+	'editWebcast': () => {
+		console.log('edit webcast');
+		addCSSRule(document.styleSheets[0], ['editWebcast'], "display: none !important");
+
+	},
 	'catchAll': () => {
 		console.log('catchall');
-
+		if ($('#KwebcastAdvancedOptions-tab').length > 0) {
+			pageMap['editWebast']();
+		}
 	}
 }
 var selectors = {
@@ -40,7 +48,9 @@ var selectors = {
 	'endpoint': "#entry-metadata > dt:nth-child(1), #entry-metadata > dd:nth-child(2),",
 	'actions': "#entryActionsMenu > li:nth-child(2), #entryActionsMenu > li:nth-child(3), #entryActionsMenu > li.divider, #entryActionsMenu > li:nth-child(5),",
 	'toBeDetached': "#wrapper, #mySidebar, #stats_wrap,",
-	'menuItems': "#tab-Publish,#tab-Addtoplaylists,#entryActionsMenu > li.divider,#tab-Delete,"
+	'menuItems': "#tab-Publish,#tab-Addtoplaylists,#entryActionsMenu > li.divider,#tab-Delete,",
+	// edit webcast
+	'editWebcast': "#customdata-ServerAction-label, #edit_entry > div:nth-child(14),"
 };
 
 function getSelectors(selarray) {
