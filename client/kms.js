@@ -1,4 +1,4 @@
-const VER = '20190106-1706';
+const VER = '20190106-1716';
 
 const myDebug = true;
 
@@ -23,11 +23,14 @@ var pageMap = {
 		console.log("sip admin page - edit");
 		addCSSRule(document.styleSheets[0], ['sipAction', 'sipStats', 'sipEndpoint'], "display: none !important");
 	},
+	'/upload/media': () => {
+		console.log('upload media');
+		addCSSRule(document.styleSheets[0], ['sipAction', 'sipEndpoint'], "display: none !important");
+	},
 	// following can't be identified solely by url path
 	'editWebcast': () => {
 		console.log('edit webcast');
 		addCSSRule(document.styleSheets[0], ['editWebcast'], "display: none !important");
-
 	},
 	'catchAll': () => {
 		console.log('catchall');
@@ -40,7 +43,6 @@ var selectors = {
 	// upload media
 	'sipAction': "#customdata-ServerAction-label, #edit_entry > div:nth-child(14),",
 	'sipEndpoint': "#customdata-SIP, #customdata-SIP+P, #customdata-SIP-label, #entry-metadata,",
-	'sipStats': "#customdata-Stats-label, #edit_entry > div:nth-child(16),",
 	'mediaPanel': "#wrapper,",
 	// SIP admin page, view mode
 	'entryBlock': "#entryDataBlock,",
