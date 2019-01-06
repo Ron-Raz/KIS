@@ -1,4 +1,4 @@
-const VER = '20190106-1742';
+const VER = '20190106-1758';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -21,7 +21,7 @@ var pageMap = {
 	},
 	'/edit/1_7y4l9qys': () => {
 		console.log("sip admin page - edit");
-		addCSSRule(document.styleSheets[0], ['sipAction', 'sipEndpoint'], "display: none !important");
+		addCSSRule(document.styleSheets[0], ['sipAction'], "display: none !important");
 	},
 	'/upload/media': () => {
 		console.log('upload media');
