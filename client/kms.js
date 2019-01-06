@@ -1,4 +1,4 @@
-const VER = '20190106-1758';
+const VER = '20190106-1805';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -30,7 +30,7 @@ var pageMap = {
 	// following can't be identified solely by url path
 	'editWebcast': () => {
 		console.log('edit webcast');
-		addCSSRule(document.styleSheets[0], ['editWebcast'], "display: none !important");
+		addCSSRule(document.styleSheets[0], ['editWebcast', 'mediaPanel'], "display: none !important");
 	},
 	'nonWebCastEdit': () => {
 		console.log('non-webcast edit');
