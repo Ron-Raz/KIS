@@ -1,4 +1,4 @@
-const VER = '20190106-1805';
+const VER = '20190106-1812';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -21,7 +21,7 @@ var pageMap = {
 	},
 	'/edit/1_7y4l9qys': () => {
 		console.log("sip admin page - edit");
-		addCSSRule(document.styleSheets[0], ['sipAction'], "display: none !important");
+		addCSSRule(document.styleSheets[0], ['sipAction', 'sipAdminEdit'], "display: none !important");
 	},
 	'/upload/media': () => {
 		console.log('upload media');
@@ -30,7 +30,7 @@ var pageMap = {
 	// following can't be identified solely by url path
 	'editWebcast': () => {
 		console.log('edit webcast');
-		addCSSRule(document.styleSheets[0], ['editWebcast', 'mediaPanel'], "display: none !important");
+		addCSSRule(document.styleSheets[0], ['editWebcast'], "display: none !important");
 	},
 	'nonWebCastEdit': () => {
 		console.log('non-webcast edit');
@@ -61,7 +61,9 @@ var selectors = {
 	'toBeDetached': "#wrapper, #mySidebar, #stats_wrap,",
 	'menuItems': "#tab-Publish,#tab-Addtoplaylists,#entryActionsMenu > li.divider,#tab-Delete,",
 	// edit webcast
-	'editWebcast': "#customdata-ServerAction-label, #edit_entry > div:nth-child(14),"
+	'editWebcast': "#customdata-ServerAction-label, #edit_entry > div:nth-child(14),",
+	// sip admin - edit
+	'sipAdminEdit': '#editEntryMedia'
 };
 
 function getSelectors(selarray) {
