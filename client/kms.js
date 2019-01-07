@@ -1,4 +1,4 @@
-const VER = '20190106-1814';
+const VER = '20190106-2131';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -6,18 +6,22 @@ var wlp = window.location.pathname;
 if (myDebug === false) {
 	console.log = function () {};
 }
-var pageAddWebcast = () => {
 
-}
 var pageMap = {
 	'/kwebcast/entry/add': () => {
 		console.log('add Webcast');
 		addCSSRule(document.styleSheets[0], ['sipAction'], "display: none !important");
 	},
-	'/media/SIP/1_7y4l9qys': () => {
+	'sipAdminView': () => {
 		console.log('sip admin page - view')
 		addCSSRule(document.styleSheets[0], ['entryBlock'], "width: 100% !important");
 		$(getSelectors(['toBeDetached', 'endpoint', 'menuItems'])).detach();
+	},
+	'/media/SIP/1_7y4l9qys': () => {
+		pageMap['sipAdminView']();
+	},
+	'/media/t/1_7y4l9qys': () => {
+		pageMap['sipAdminView']();
 	},
 	'/edit/1_7y4l9qys': () => {
 		console.log("sip admin page - edit");
