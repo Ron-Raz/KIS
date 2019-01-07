@@ -5,22 +5,17 @@ from KalturaClient.Plugins.Core import *
 from KalturaClient.Plugins.Metadata import *
 from KalturaClient.Plugins.Schedule import *
 from datetime import datetime
+import json
 
 # load account specific values from config file
 
-METADATA_PROFILE_ID = 11037521
-NOT_FOUND = 'not found'
-TIME_ZONE = 'Central'
-SIP_ID = '1_7y4l9qys'
-SIP_TAG '<span class="wysiwyg-color-white"></span>'
-config = KalturaConfiguration(2169841)
-config.serviceUrl = "https://www.kaltura.com/"
+with open('/home/kaltura/KIS/server/config.json') as f:
+    cfg = json.load(f)
+
+config = KalturaConfiguration(cfg.partnerId)
+config.serviceUrl = cfg.serviceUrl
 client = KalturaClient(config)
-ks = client.session.start(
-      "a594c876e1c39128f5bda311088523ff",
-      "ron.raz@kaltura.com",
-      KalturaSessionType.ADMIN,
-      2169841)
+ks = client.session.start( cfg.secret, cfg.user, KalturaSessionType.ADMIN, cfg.partnerId )
 client.setKs(ks)
 
 filter = KalturaMediaEntryFilter()
@@ -28,7 +23,7 @@ filter.mediaTypeEqual = KalturaMediaType.LIVE_STREAM_FLASH
 pager = KalturaFilterPager()
 
 mdFilter = KalturaMetadataFilter()
-mdFilter.metadataProfileIdEqual = METADATA_PROFILE_ID
+mdFilter.metadataProfileIdEqual = cfg.metadataProfileId
 
 lsFilter = KalturaLiveStreamScheduleEventFilter()
 lsFilter.statusEqual = KalturaScheduleEventStatus.ACTIVE
@@ -50,7 +45,7 @@ for obj in objs:
 	if len(mdResponse) == 1:
 		my['sip'] = mdResponse[0].getXml()
 	else:
-		my['sip'] = NOT_FOUND
+		my['sip'] = cfg.notFound
 	# get live stream shedule start/end
 	lsFilter.templateEntryIdEqual = obj.getId()
 	lsPager = KalturaFilterPager()
@@ -60,7 +55,7 @@ for obj in objs:
 		my['end'] = datetime.fromtimestamp(lsResponse[0].getEndDate())
 		my['eventid'] = lsResponse[0].getId()
 	else:
-		my['start'] = NOT_FOUND
-		my['end'] = NOT_FOUND
+		my['start'] = cfg.notFound
+		my['end'] = cfg.notFound
 	# print the properties	
 	print(my)
