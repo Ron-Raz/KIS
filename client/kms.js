@@ -1,4 +1,4 @@
-const VER = '20190106-2155';
+const VER = '20190106-2203';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -67,7 +67,7 @@ var selectors = {
 	// edit webcast
 	'editWebcast': "#customdata-ServerAction-label, #edit_entry > div:nth-child(14),",
 	// sip admin - edit
-	'sipAdminEdit': '#editEntryMedia,'
+	'sipAdminEdit': '#editEntryMedia,#wrap > div:nth-child(7) > div > ul > li.pull-right'
 };
 
 function getSelectors(selarray) {
