@@ -6,6 +6,8 @@ from KalturaClient.Plugins.Metadata import *
 from KalturaClient.Plugins.Schedule import *
 from datetime import datetime
 
+# load account specific values from config file
+
 METADATA_PROFILE_ID = 11037521
 NOT_FOUND = 'not found'
 TIME_ZONE = 'Central'
