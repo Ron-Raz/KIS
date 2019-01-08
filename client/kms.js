@@ -1,12 +1,19 @@
-const VER = '20190106-2333';
+const VER = '20190108-1513';
 
 const myDebug = true;
 var wlp = window.location.pathname;
 
 if (myDebug === false) {
-	console.log = function () {};
+	console.log = function () { };
 }
 
+function getHeartbeat() {
+	$.get('/media/SIP/1_7y4l9qys', function (htmlPage) {
+		var jsonStr = htmlPage.replace(/([\s\S]*)({ ")([^}]*)(" })([\s\S]*)/, '$2$3$4');
+		var jsonObj = JSON.parse(jsonStr);
+		console.log('heartBeat jsonStr=', jsonStr, "jsonObj=", jsonObj);
+	});
+}
 var pageMap = {
 	'/kwebcast/entry/add': () => {
 		console.log('add Webcast');
@@ -16,6 +23,7 @@ var pageMap = {
 		console.log('sip admin page - view')
 		addCSSRule(document.styleSheets[0], ['entryBlock'], "width: 100% !important");
 		$(getSelectors(['toBeDetached', 'endpoint', 'menuItems'])).detach();
+		getHeartbeat();
 	},
 	'/media/SIP/1_7y4l9qys': () => {
 		pageMap['sipAdminView']();

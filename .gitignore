@@ -2,5 +2,6 @@
 /ova/
 /project.code-workspace
 /commit.sh
+/copy.sh
 /.gitignore
 /bfg*jar
