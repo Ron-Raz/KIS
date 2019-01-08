@@ -1,4 +1,4 @@
-const VER = '20190108-1514';
+const VER = '20190108-1529';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -10,8 +10,8 @@ if (myDebug === false) {
 function getHeartbeat() {
 	$.get('/media/SIP/1_7y4l9qys', function (htmlPage) {
 		var jsonStr = htmlPage.replace(/([\s\S]*)({ ")([^}]*)(" })([\s\S]*)/, '$2$3$4');
-		//var jsonObj = JSON.parse(jsonStr);
-		console.log('heartBeat jsonStr=', jsonStr);
+		var jsonObj = JSON.parse(jsonStr);
+		console.log('heartBeat jsonStr=', jsonStr,"jsonObj=",jsonObj);
 	});
 }
 var pageMap = {
