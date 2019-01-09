@@ -1,4 +1,4 @@
-const VER = '20190109-1827';
+const VER = '20190109-1829';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -19,7 +19,7 @@ function getHeartbeat() {
 		}
 		const jsonObj = JSON.parse(jsonStr, fReviver);
 		const curTime = new Date();
-		$("#statusOnline").text(jsonObj.heartbeatTime.getUTCHours()+':'+jsonObj.heartbeatTime.getUTCMinutes()+' ' + curTime.getUTCHours()+':'+curTime.getUTCMinutes());
+		$("#statusOnline").text(jsonObj.heartbeatTime.getUTCHours()+':'+jsonObj.heartbeatTime.getUTCMinutes()+' ' + curTime.getHours()+':'+curTime.getMinutes());
 	});
 	setTimeout(getHeartbeat, 60000);
 }
