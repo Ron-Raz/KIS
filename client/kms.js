@@ -1,4 +1,4 @@
-const VER = '20190109-1753';
+const VER = '20190109-1754';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -19,7 +19,7 @@ function getHeartbeat() {
 		}
 		const jsonObj = JSON.parse(jsonStr, fReviver);
 		const curTime = new Date();
-		$("#statusOnline").text(jsonObj.heartbeatTime + ' ' + curTime.getTime());
+		$("#statusOnline").text(jsonObj.heartbeatTime.getTime() + ' ' + curTime.getTime());
 	});
 	setTimeout(getHeartbeat, 60000);
 }
