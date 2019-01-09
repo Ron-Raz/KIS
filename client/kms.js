@@ -1,4 +1,4 @@
-const VER = '20190108-1553';
+const VER = '20190109-1712';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -18,8 +18,9 @@ function getHeartbeat() {
 			return value;
 		}
 		const jsonObj = JSON.parse(jsonStr, fReviver);
-		console.log('heartBeat jsonStr=', jsonStr, "jsonObj=", jsonObj);
+		console.log('heartBeat jsonStr=', jsonObj);
 	});
+	setTimeout(getHeartbeat, 60000);
 }
 var pageMap = {
 	'/kwebcast/entry/add': () => {
