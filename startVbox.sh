@@ -1,0 +1,1 @@
+VBoxManage startvm centos --type headless

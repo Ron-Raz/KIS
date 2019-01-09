@@ -23,8 +23,8 @@ ks = client.session.start(
 client.setKs(ks)
 
 base_entry = KalturaBaseEntry()
-base_entry.description = '{ "heartbeatTime":'+datetime.datetime.now().strftime(
-    "%Y-%m-%dT%H:%M:%SZ")+', "serverVersion":"1.0","cpu":"0.2","mem":"0.4","status":"No Event" }'
+base_entry.description = '{ "heartbeatTime":"'+datetime.datetime.now().strftime(
+    "%Y-%m-%dT%H:%M:%SZ")+'", "serverVersion":"1.0","cpu":"0.2","mem":"0.4","status":"No Event" }'
 
 result = client.baseEntry.update(cfg['sipAdminEntryId'], base_entry)
-print(result.objects)
+print(result.getId(),result.getName(),result.getDescription())
