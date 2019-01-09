@@ -1,4 +1,4 @@
-const VER = '20190109-1712';
+const VER = '20190109-1753';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -18,7 +18,8 @@ function getHeartbeat() {
 			return value;
 		}
 		const jsonObj = JSON.parse(jsonStr, fReviver);
-		console.log('heartBeat jsonStr=', jsonObj);
+		const curTime = new Date();
+		$("#statusOnline").text(jsonObj.heartbeatTime + ' ' + curTime.getTime());
 	});
 	setTimeout(getHeartbeat, 60000);
 }
@@ -30,7 +31,16 @@ var pageMap = {
 	'sipAdminView': () => {
 		console.log('sip admin page - view')
 		addCSSRule(document.styleSheets[0], ['entryBlock'], "width: 100% !important");
+		addCSSRule(document.styleSheets[0], ['entryDescription'], "display: none !important");
 		$(getSelectors(['toBeDetached', 'endpoint', 'menuItems'])).detach();
+		$('#Details').after(
+			'<div id="statusContainer">' +
+			'  <span id="statusOnline">online</span>' +
+			'  <span id="statusCpu">cpu</span>' +
+			'  <span id="statusMem">mem</span>' +
+			'  <span id="statusDsk">dsk</span>' +
+			'</div>'
+		);
 		getHeartbeat();
 	},
 	'/media/SIP/1_7y4l9qys': () => {
@@ -80,6 +90,7 @@ var selectors = {
 	'actions': "#entryActionsMenu > li:nth-child(2), #entryActionsMenu > li:nth-child(3), #entryActionsMenu > li.divider, #entryActionsMenu > li:nth-child(5),",
 	'toBeDetached': "#wrapper, #mySidebar, #stats_wrap,",
 	'menuItems': "#tab-Publish,#tab-Addtoplaylists,#entryActionsMenu > li.divider,#tab-Delete,",
+	'entryDescription': '#Details,',
 	// edit webcast
 	'editWebcast': "#customdata-ServerAction-label, #edit_entry > div:nth-child(14),",
 	// sip admin - edit
