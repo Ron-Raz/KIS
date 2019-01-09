@@ -8,28 +8,31 @@ import datetime
 import sched
 import time
 
-
 with open('/home/kaltura/KIS/server/config.json') as f:
     cfg = json.load(f)
+print 'cfg=', cfg
 
 s = sched.scheduler(time.time, time.sleep)
+count = 0
+config = KalturaConfiguration(cfg['partnerId'])
+config.serviceUrl = cfg['serviceUrl']
+client = KalturaClient(config)
+base_entry = KalturaBaseEntry()
 
 def doHeartbeat(sc):
-    print 'cfg=', cfg
-    config = KalturaConfiguration(cfg['partnerId'])
-    config.serviceUrl = cfg['serviceUrl']
-    client = KalturaClient(config)
+    global cfg, s, count, config, client, base_entry
     ks = client.session.start(
-        cfg['secret'], cfg['user'], KalturaSessionType.ADMIN, cfg['partnerId'])
+        cfg['secret'], cfg['user'], KalturaSessionType.ADMIN, cfg['partnerId'], cfg['kalturaSessionInSeconds'])
     client.setKs(ks)
 
-    base_entry = KalturaBaseEntry()
     base_entry.description = '{ "heartbeatTime":"'+datetime.datetime.now().strftime(
         "%Y-%m-%dT%H:%M:%SZ")+'", "serverVersion":"1.0","cpu":"0.2","mem":"0.4","status":"No Event" }'
 
     result = client.baseEntry.update(cfg['sipAdminEntryId'], base_entry)
-    print(result.getId(), result.getName(), result.getDescription())
-    s.enter(60, 1, doHeartbeat, (sc,))
+    client.session.end()
+    count+= 1
+    print(count, result.getId(), result.getName(), result.getDescription())
+    s.enter(cfg['heartbeatIntervalInSeconds'], 1, doHeartbeat, (sc,))
 
-s.enter(60, 1, doHeartbeat, (s,))
+s.enter(cfg['heartbeatIntervalInSeconds'], 1, doHeartbeat, (s,))
 s.run()
