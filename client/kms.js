@@ -1,4 +1,4 @@
-const VER = '20190109-2220';
+const VER = '20190109-2237';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -130,7 +130,8 @@ var selectors = {
 	'toBeDetached': "#wrapper, #mySidebar, #stats_wrap,",
 	'menuItems': "#tab-Publish,#tab-Addtoplaylists,#entryActionsMenu > li.divider,#tab-Delete,",
 	'entryDescription': '#Details,',
-	'statusOnline': ".statusOnline,",
+	'statusOnlineStarted': ".statusOnlineStarted,",
+	'statusOnlineStopped': ".statusOnlineStopped,",
 	'statusOffline': '.statusOffline,',
 	// edit webcast
 	'editWebcast': "#customdata-ServerAction-label, #edit_entry > div:nth-child(14),",
