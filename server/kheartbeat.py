@@ -25,7 +25,7 @@ def doHeartbeat(sc):
         cfg['secret'], cfg['user'], KalturaSessionType.ADMIN, cfg['partnerId'], cfg['kalturaSessionInSeconds'])
     client.setKs(ks)
 
-    base_entry.description = '{ "heartbeatTime":"'+datetime.datetime.now().strftime(
+    base_entry.description = '{ "heartbeatTime":"'+datetime.datetime.utcnow().strftime(
         "%Y-%m-%dT%H:%M:%SZ")+'", "serverVersion":"1.0","cpu":"0.2","mem":"0.4","status":"No Event" }'
 
     result = client.baseEntry.update(cfg['sipAdminEntryId'], base_entry)

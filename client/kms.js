@@ -1,4 +1,4 @@
-const VER = '20190109-1829';
+const VER = '20190109-2001';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -19,7 +19,18 @@ function getHeartbeat() {
 		}
 		const jsonObj = JSON.parse(jsonStr, fReviver);
 		const curTime = new Date();
-		$("#statusOnline").text(jsonObj.heartbeatTime.getUTCHours()+':'+jsonObj.heartbeatTime.getUTCMinutes()+' ' + curTime.getHours()+':'+curTime.getMinutes());
+		var timeDiff = Math.abs(jsonObj.heartbeatTime.getMinutes() - curTime.getMinutes());
+		if (timeDiff < 2) {
+			// all is well
+			$("#serverOnline").text('SIP Server Online');
+			$("#serverOnline").addClass('statusOnline');
+			$("#serverOnline").removeClass('statusOffline');
+		} else {
+			// all is NOT well
+			$("#serverOnline").text('SIP Server Online');
+			$("#serverOnline").addClass('statusOffline');
+			$("#serverOnline").removeClass('statusOnline');
+		}
 	});
 	setTimeout(getHeartbeat, 60000);
 }
@@ -32,6 +43,9 @@ var pageMap = {
 		console.log('sip admin page - view')
 		addCSSRule(document.styleSheets[0], ['entryBlock'], "width: 100% !important");
 		addCSSRule(document.styleSheets[0], ['entryDescription'], "display: none !important");
+		addCSSRule(document.styleSheets[0], ['statusOnline'],
+			'background-color: green;' +
+			'color: white;');
 		$(getSelectors(['toBeDetached', 'endpoint', 'menuItems'])).detach();
 		$('#Details').after(
 			'<div id="statusContainer">' +
@@ -91,6 +105,8 @@ var selectors = {
 	'toBeDetached': "#wrapper, #mySidebar, #stats_wrap,",
 	'menuItems': "#tab-Publish,#tab-Addtoplaylists,#entryActionsMenu > li.divider,#tab-Delete,",
 	'entryDescription': '#Details,',
+	'statusOnline': ".statusOnline,",
+	'statusOffline': '.statusOffline,',
 	// edit webcast
 	'editWebcast': "#customdata-ServerAction-label, #edit_entry > div:nth-child(14),",
 	// sip admin - edit
