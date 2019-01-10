@@ -1,4 +1,4 @@
-const VER = '20190109-2342';
+const VER = '20190109-2345';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -47,7 +47,7 @@ function getHeartbeat() {
 			lastStatusServerClass = statusServerClass;
 		}
 	});
-	setTimeout(getHeartbeat, 60000);
+	setTimeout(getHeartbeat, 20000);
 }
 var pageMap = {
 	'/kwebcast/entry/add': () => {
