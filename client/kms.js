@@ -1,4 +1,4 @@
-const VER = '20190109-2005';
+const VER = '20190109-2024';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -22,14 +22,14 @@ function getHeartbeat() {
 		var timeDiff = Math.abs(jsonObj.heartbeatTime.getMinutes() - curTime.getMinutes());
 		if (timeDiff < 2) {
 			// all is well
-			$("#statusOnline").text('SIP Server Online');
-			$("#statusOnline").addClass('statusOnline');
-			$("#statusOnline").removeClass('statusOffline');
+			$("#statusServer").text('SIP Server Online');
+			$("#statusServer").addClass('statusOnline');
+			$("#statusServer").removeClass('statusOffline');
 		} else {
 			// all is NOT well
-			$("#statusOnline").text('SIP Server Online');
-			$("#statusOnline").addClass('statusOffline');
-			$("#statusOnline").removeClass('statusOnline');
+			$("#statusServer").text('SIP Server Online');
+			$("#statusServer").addClass('statusOffline');
+			$("#statusServer").removeClass('statusOnline');
 		}
 	});
 	setTimeout(getHeartbeat, 60000);
@@ -44,12 +44,19 @@ var pageMap = {
 		addCSSRule(document.styleSheets[0], ['entryBlock'], "width: 100% !important");
 		addCSSRule(document.styleSheets[0], ['entryDescription'], "display: none !important");
 		addCSSRule(document.styleSheets[0], ['statusOnline'],
-			'background-color: green;' +
-			'color: white;');
+			'background-color: MediumSeaGreen;' +
+			'color: white;' +
+			'padding: 10px;' +
+			'border-radius: 25px;');
+		addCSSRule(document.styleSheets[0], ['statusOffline'],
+			'background-color: red;' +
+			'color: white;' +
+			'padding: 10px;' +
+			'border-radius: 25px;');
 		$(getSelectors(['toBeDetached', 'endpoint', 'menuItems'])).detach();
 		$('#Details').after(
 			'<div id="statusContainer">' +
-			'  <span id="statusOnline">online</span>' +
+			'  <span id="statusServer">online</span>' +
 			'  <span id="statusCpu">cpu</span>' +
 			'  <span id="statusMem">mem</span>' +
 			'  <span id="statusDsk">dsk</span>' +
