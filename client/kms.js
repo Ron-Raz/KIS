@@ -1,4 +1,4 @@
-const VER = '20190109-2237';
+const VER = '20190109-2249';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -7,7 +7,7 @@ if (myDebug === false) {
 	console.log = function () { };
 }
 
-var lastStatusServerClass = '';
+var lastStatusServerClass = '', lastStatusServerText = '';
 function getHeartbeat() {
 	$.get('/media/SIP/1_7y4l9qys', function (htmlPage) {
 		const jsonStr = htmlPage.replace(/([\s\S]*)({ ")([^}]*)(" })([\s\S]*)/, '$2$3$4');
@@ -38,9 +38,14 @@ function getHeartbeat() {
 			statusServerText = 'SIP Server Offline';
 			statusServerClass = 'statusOffline';
 		}
-		$("#statusServer").text(statusServerText);
-		$("#statusServer").addClass(statusServerClass).removeClass(lastStatusServerClass);
-		lastStatusServerClass = statusServerClass;
+		if (statusServerText !== lastStatusServerText) {
+			$("#statusServer").text(statusServerText);
+			lastStatusServerText = statusServerText
+		}
+		if (statusServerClass !== lastStatusServerClass) {
+			$("#statusServer").addClass(statusServerClass).removeClass(lastStatusServerClass);
+			lastStatusServerClass = statusServerClass;
+		}
 	});
 	setTimeout(getHeartbeat, 60000);
 }
