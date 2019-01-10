@@ -1,4 +1,4 @@
-const VER = '20190109-2024';
+const VER = '20190109-2027';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -27,7 +27,7 @@ function getHeartbeat() {
 			$("#statusServer").removeClass('statusOffline');
 		} else {
 			// all is NOT well
-			$("#statusServer").text('SIP Server Online');
+			$("#statusServer").text('SIP Server Offline');
 			$("#statusServer").addClass('statusOffline');
 			$("#statusServer").removeClass('statusOnline');
 		}
@@ -44,11 +44,13 @@ var pageMap = {
 		addCSSRule(document.styleSheets[0], ['entryBlock'], "width: 100% !important");
 		addCSSRule(document.styleSheets[0], ['entryDescription'], "display: none !important");
 		addCSSRule(document.styleSheets[0], ['statusOnline'],
+			'margin-top: 15px;' +
 			'background-color: MediumSeaGreen;' +
 			'color: white;' +
 			'padding: 10px;' +
 			'border-radius: 25px;');
 		addCSSRule(document.styleSheets[0], ['statusOffline'],
+			'margin-top: 15px;' +
 			'background-color: red;' +
 			'color: white;' +
 			'padding: 10px;' +
