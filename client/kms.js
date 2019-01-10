@@ -1,4 +1,4 @@
-const VER = '20190109-2155';
+const VER = '20190109-2218';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -7,6 +7,7 @@ if (myDebug === false) {
 	console.log = function () { };
 }
 
+var lastStatusServerClass = '';
 function getHeartbeat() {
 	$.get('/media/SIP/1_7y4l9qys', function (htmlPage) {
 		const jsonStr = htmlPage.replace(/([\s\S]*)({ ")([^}]*)(" })([\s\S]*)/, '$2$3$4');
@@ -22,19 +23,24 @@ function getHeartbeat() {
 		// calculate difference between server time and client time in minutes
 		var timeDiff = Math.floor(Math.abs(jsonObj.heartbeatTime.getTime() - curTime.getTime()) / 60000);
 		console.log('timeDiff=', timeDiff);
+		var statusServerText = '', statusServerClass = 'statusOnlineStarted';
 		if (timeDiff < 3) {
 			// server is online
 			if (jsonObj.status === 'Started') {
-				$("#statusServer").text('SIP Server Online / Status: Started');
-				$("#statusServer").removeClass('statusOnlineStopped statusOffline').addClass('statusOnlineStarted');
+				statusServerText = 'SIP Server Online / Status: Started';
+				statusServerClass = 'statusOnlineStarted';
 			} else {
-				$("#statusServer").text('SIP Server Online / Status: Stopped');
-				$("#statusServer").removeClass('statusOnlineStarted statusOffline').addClass('statusOnlineStopped');
+				statusServerText = 'SIP Server Online / Status: Stopped';
+				statusServerClass = 'statusOnlineStopped';
 			}
 		} else {
 			// all is NOT well
-			$("#statusServer").text('SIP Server Offline');
-			$("#statusServer").removeClass('statusOnlineStarted statusOnlineStopped').addClass('statusOffline');	}
+			statusServerText = 'SIP Server Offline';
+			statusServerClass = 'statusOffline';
+		}
+		$("#statusServer").text(statusServerText);
+		$("#statusServer").removeClass(lastStatusServer).addClass(statusServerClass);
+		lastStatusServerClass = statusServerClass;
 	});
 	setTimeout(getHeartbeat, 60000);
 }
