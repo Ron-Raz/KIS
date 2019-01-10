@@ -1,4 +1,4 @@
-const VER = '20190109-2129';
+const VER = '20190109-2155';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -19,19 +19,22 @@ function getHeartbeat() {
 		}
 		const jsonObj = JSON.parse(jsonStr, fReviver);
 		const curTime = new Date();
-		var timeDiff = Math.abs(jsonObj.heartbeatTime.getTime() - curTime.getTime());
-		console.log('timeDiff=',timeDiff);
+		// calculate difference between server time and client time in minutes
+		var timeDiff = Math.floor(Math.abs(jsonObj.heartbeatTime.getTime() - curTime.getTime()) / 60000);
+		console.log('timeDiff=', timeDiff);
 		if (timeDiff < 3) {
 			// server is online
-			$("#statusServer").text('SIP Server Online');
-			$("#statusServer").addClass('statusOnlineStarted');
-			$("#statusServer").removeClass('statusOffline');
+			if (jsonObj.status === 'Started') {
+				$("#statusServer").text('SIP Server Online / Status: Started');
+				$("#statusServer").removeClass('statusOnlineStopped statusOffline').addClass('statusOnlineStarted');
+			} else {
+				$("#statusServer").text('SIP Server Online / Status: Stopped');
+				$("#statusServer").removeClass('statusOnlineStarted statusOffline').addClass('statusOnlineStopped');
+			}
 		} else {
 			// all is NOT well
 			$("#statusServer").text('SIP Server Offline');
-			$("#statusServer").addClass('statusOnlineStarted');
-			$("#statusServer").removeClass('statusOnline');
-		}
+			$("#statusServer").removeClass('statusOnlineStarted statusOnlineStopped').addClass('statusOffline');	}
 	});
 	setTimeout(getHeartbeat, 60000);
 }
@@ -50,13 +53,13 @@ var pageMap = {
 			'color: white;' +
 			'padding: 5px 10px;' +
 			'border-radius: 7px;');
-			addCSSRule(document.styleSheets[0], ['statusOnlineStopped'],
+		addCSSRule(document.styleSheets[0], ['statusOnlineStopped'],
 			'margin-top: 15px;' +
 			'background-color: red;' +
 			'color: white;' +
 			'padding: 5px 10px;' +
 			'border-radius: 7px;');
-			addCSSRule(document.styleSheets[0], ['statusOffline'],
+		addCSSRule(document.styleSheets[0], ['statusOffline'],
 			'margin-top: 15px;' +
 			'background-color: gray;' +
 			'color: white;' +
