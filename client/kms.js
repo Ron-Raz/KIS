@@ -1,4 +1,4 @@
-const VER = '20190109-2218';
+const VER = '20190109-2220';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -39,7 +39,7 @@ function getHeartbeat() {
 			statusServerClass = 'statusOffline';
 		}
 		$("#statusServer").text(statusServerText);
-		$("#statusServer").removeClass(lastStatusServer).addClass(statusServerClass);
+		$("#statusServer").addClass(statusServerClass).removeClass(lastStatusServerClass);
 		lastStatusServerClass = statusServerClass;
 	});
 	setTimeout(getHeartbeat, 60000);
