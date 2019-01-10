@@ -19,20 +19,22 @@ config.serviceUrl = cfg['serviceUrl']
 client = KalturaClient(config)
 base_entry = KalturaBaseEntry()
 
-def doHeartbeat(sc):
+def doHeartbeat(sc=None):
     global cfg, s, count, config, client, base_entry
     ks = client.session.start(
         cfg['secret'], cfg['user'], KalturaSessionType.ADMIN, cfg['partnerId'], cfg['kalturaSessionInSeconds'])
     client.setKs(ks)
 
     base_entry.description = '{ "heartbeatTime":"'+datetime.datetime.utcnow().strftime(
-        "%Y-%m-%dT%H:%M:%SZ")+'", "serverVersion":"1.0","cpu":"0.2","mem":"0.4","status":"No Event" }'
+        "%Y-%m-%dT%H:%M:%SZ")+'", "serverVersion":"1.0","cpu":"0.2","mem":"0.4","status":"Started" }'
 
     result = client.baseEntry.update(cfg['sipAdminEntryId'], base_entry)
     client.session.end()
     count+= 1
     print(count, result.getId(), result.getName(), result.getDescription())
-    s.enter(cfg['heartbeatIntervalInSeconds'], 1, doHeartbeat, (sc,))
+    if sc is not None:
+        s.enter(cfg['heartbeatIntervalInSeconds'], 1, doHeartbeat, (sc,))
 
+doHeartbeat()
 s.enter(cfg['heartbeatIntervalInSeconds'], 1, doHeartbeat, (s,))
 s.run()

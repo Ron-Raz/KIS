@@ -1,4 +1,4 @@
-const VER = '20190109-2030';
+const VER = '20190109-2129';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -19,16 +19,17 @@ function getHeartbeat() {
 		}
 		const jsonObj = JSON.parse(jsonStr, fReviver);
 		const curTime = new Date();
-		var timeDiff = Math.abs(jsonObj.heartbeatTime.getMinutes() - curTime.getMinutes());
-		if (timeDiff < 2) {
-			// all is well
+		var timeDiff = Math.abs(jsonObj.heartbeatTime.getTime() - curTime.getTime());
+		console.log('timeDiff=',timeDiff);
+		if (timeDiff < 3) {
+			// server is online
 			$("#statusServer").text('SIP Server Online');
-			$("#statusServer").addClass('statusOnline');
+			$("#statusServer").addClass('statusOnlineStarted');
 			$("#statusServer").removeClass('statusOffline');
 		} else {
 			// all is NOT well
 			$("#statusServer").text('SIP Server Offline');
-			$("#statusServer").addClass('statusOffline');
+			$("#statusServer").addClass('statusOnlineStarted');
 			$("#statusServer").removeClass('statusOnline');
 		}
 	});
@@ -43,18 +44,24 @@ var pageMap = {
 		console.log('sip admin page - view')
 		addCSSRule(document.styleSheets[0], ['entryBlock'], "width: 100% !important");
 		addCSSRule(document.styleSheets[0], ['entryDescription'], "display: none !important");
-		addCSSRule(document.styleSheets[0], ['statusOnline'],
+		addCSSRule(document.styleSheets[0], ['statusOnlineStarted'],
 			'margin-top: 15px;' +
 			'background-color: MediumSeaGreen;' +
 			'color: white;' +
 			'padding: 5px 10px;' +
-			'border-radius: 15px;');
-		addCSSRule(document.styleSheets[0], ['statusOffline'],
+			'border-radius: 7px;');
+			addCSSRule(document.styleSheets[0], ['statusOnlineStopped'],
 			'margin-top: 15px;' +
 			'background-color: red;' +
 			'color: white;' +
 			'padding: 5px 10px;' +
-			'border-radius: 15px;');
+			'border-radius: 7px;');
+			addCSSRule(document.styleSheets[0], ['statusOffline'],
+			'margin-top: 15px;' +
+			'background-color: gray;' +
+			'color: white;' +
+			'padding: 5px 10px;' +
+			'border-radius: 7px;');
 		$(getSelectors(['toBeDetached', 'endpoint', 'menuItems'])).detach();
 		$('#Details').after(
 			'<div id="statusContainer">' +
