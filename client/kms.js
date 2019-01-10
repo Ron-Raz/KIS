@@ -1,4 +1,4 @@
-const VER = '20190109-2027';
+const VER = '20190109-2029';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -47,14 +47,14 @@ var pageMap = {
 			'margin-top: 15px;' +
 			'background-color: MediumSeaGreen;' +
 			'color: white;' +
-			'padding: 10px;' +
-			'border-radius: 25px;');
+			'padding: 5px;' +
+			'border-radius: 10px;');
 		addCSSRule(document.styleSheets[0], ['statusOffline'],
 			'margin-top: 15px;' +
 			'background-color: red;' +
 			'color: white;' +
-			'padding: 10px;' +
-			'border-radius: 25px;');
+			'padding: 5px;' +
+			'border-radius: 10px;');
 		$(getSelectors(['toBeDetached', 'endpoint', 'menuItems'])).detach();
 		$('#Details').after(
 			'<div id="statusContainer">' +
