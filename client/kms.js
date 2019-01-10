@@ -1,4 +1,4 @@
-const VER = '20190109-2249';
+const VER = '20190109-2342';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -26,7 +26,7 @@ function getHeartbeat() {
 		var statusServerText = '', statusServerClass = 'statusOnlineStarted';
 		if (timeDiff < 3) {
 			// server is online
-			if (jsonObj.status === 'Started') {
+			if (jsonObj.status === 'Start Server') {
 				statusServerText = 'SIP Server Online / Status: Started';
 				statusServerClass = 'statusOnlineStarted';
 			} else {
