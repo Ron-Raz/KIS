@@ -1,4 +1,4 @@
-const VER = '20190109-2001';
+const VER = '20190109-2005';
 
 const myDebug = true;
 var wlp = window.location.pathname;
@@ -22,14 +22,14 @@ function getHeartbeat() {
 		var timeDiff = Math.abs(jsonObj.heartbeatTime.getMinutes() - curTime.getMinutes());
 		if (timeDiff < 2) {
 			// all is well
-			$("#serverOnline").text('SIP Server Online');
-			$("#serverOnline").addClass('statusOnline');
-			$("#serverOnline").removeClass('statusOffline');
+			$("#statusOnline").text('SIP Server Online');
+			$("#statusOnline").addClass('statusOnline');
+			$("#statusOnline").removeClass('statusOffline');
 		} else {
 			// all is NOT well
-			$("#serverOnline").text('SIP Server Online');
-			$("#serverOnline").addClass('statusOffline');
-			$("#serverOnline").removeClass('statusOnline');
+			$("#statusOnline").text('SIP Server Online');
+			$("#statusOnline").addClass('statusOffline');
+			$("#statusOnline").removeClass('statusOnline');
 		}
 	});
 	setTimeout(getHeartbeat, 60000);
